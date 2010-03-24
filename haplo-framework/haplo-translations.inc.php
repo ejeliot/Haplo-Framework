@@ -178,7 +178,9 @@
                 // whilst translating the user has the option to switch out all values with the corresponding key
                 // this helps to see what translated text will appear where
                 // set ALLOW_SHOW_KEYS false to disable - might be preferable in production
-                if (!$this->translationsAllowShowKeys || (!isset($_GET['showKeys']) && !isset($_POST['showKeys']))) {
+                if ($this->translationsAllowShowKeys && (isset($_GET['showKeys']) || isset($_POST['showKeys']))) {
+                    return $key;
+                } else {
                     return $translation;
                 }
             }
@@ -197,7 +199,7 @@
          **/
         public function get_plural($key, $qty) {
             // TODO: Implement get_plural functionality.
-            throw new Exception("Method (get_plural) not implemented yet.");
+            throw new HaploException("Method (get_plural) not implemented yet.");
         }
     }
 ?>

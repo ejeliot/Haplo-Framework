@@ -5,9 +5,17 @@
      * @author Ed Eliot
      * @copyright Brightfish Software Limited, 2008-2010. See license.txt for more details.
      * @package HaploCache
-     **/
-     
+     **/ 
     class HaploCache {
+        /**
+         * Factory method for getting a cache object of different types (file, memcached)
+         *
+         * @param string $key Key to store data against
+         * @param integer $cacheTime Length of time in seconds to cache data for
+         * @param string $type String containing library type to use (file, memcached)
+         * @return object
+         * @author Ed Eliot
+         **/
         public static function get_object($key, $cacheTime = HAPLO_CACHE_LENGTH, $type = HAPLO_CACHE_LIBRARY) {
             $libraryPath = HAPLO_FRAMEWORK_PATH."/haplo-$type-cache.inc.php";
             $libraryClassName = 'Haplo'.ucfirst($type).'Cache';
