@@ -43,7 +43,7 @@
          * @author Ed Eliot
          **/
         public function __construct($filename, $filePaths = HAPLO_TEMPLATE_PATHS) {
-            if (!preg_match('/[a-z0-9_-]+\.php/i', $filename)) {
+            if (!preg_match('/[a-z0-9\/_-]+\.php/i', $filename)) {
                 throw new Exception("Invalid template filename specified ($filename). Characters allowed in the filename are a-z, 0-9, _ and -. The filename must also end in .php");
             }
             

@@ -6,11 +6,28 @@
      * @package HaploCsrfProtect
      **/
 
-    class HaploCsrfProtect {
+    class HaploCsrfProtect extends HaploSingleton {
         protected $csrfFormField = '_csrf_protect_token';
         
-        public function __construct() {
+        protected function __construct() {
             $this->enable();
+        }
+        
+        /**
+         * Static helper method used to ensure only one instance of the class is instantiated
+         * This overrides the base version in the abstract HaploSingleton class because 
+         * because PHP < 5.3 doesn't support late static binding
+         *
+         * @return HaploCsrfProtect
+         * @author Ed Eliot
+         **/
+        public static function get_instance() {
+            $class = __CLASS__;
+            
+            if (!isset(self::$instances[$class])) {
+                self::$instances[$class] = new $class;
+            }
+            return self::$instances[$class];
         }
     
         protected function generate_token() {

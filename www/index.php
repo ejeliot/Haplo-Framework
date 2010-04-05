@@ -28,13 +28,14 @@
     
     // set up URL mappings
     $urls = array(
-        '/.*' => 'static-page',
+        '/(?<template>[a-z0-9/-]*)' => 'static-page',
     );
     
+    // check that the framework is set up correctly
     HaploSetup::validate();
     
     // create an instance of the router
-    $router = new HaploRouter($urls);
+    $router = HaploRouter::get_instance($urls);
     
     /**
      * filter input variables - GET, POST 
@@ -43,16 +44,18 @@
      * as it offers some basic protection against use of unfiltered 
      * content
      **/
-    $securityFilter = new HaploInputProtect();
+    $securityFilter = HaploInputProtect::get_instance();
     
     // Add protection against cross site request forgeries (CSRF) in forms
-    $csrfProtect = new HaploCsrfProtect();
+    $csrfProtect = HaploCsrfProtect::get_instance();
     
     /**
      * set up support for translations
-     * the language you pass should probably be a two letter ISO code
+     * the language you pass should probably be a locale code (e.g. en-us)
      **/
-    $translations = new HaploTranslations('en');
+    $translations = new HaploTranslations('en-us');
+    // an example of using the locale specified by the browser
+    // $translations = new HaploTranslations($router->get_browser_locale('en-us'));
     
     // load selected action
     if ($action = $router->get_action()) {

@@ -62,6 +62,7 @@
          **/
         public function __construct(
             $lang = HAPLO_TRANSLATIONS_DEFAULT_LANG, 
+            $defaultLang = HAPLO_TRANSLATIONS_DEFAULT_LANG,
             $translationsDir = HAPLO_TRANSLATIONS_PATH,
             $translationsCacheDir = HAPLO_CACHE_PATH,
             $translationsAllowShowKeys = HAPLO_TRANSLATIONS_ALLOW_SHOW_KEYS
@@ -72,11 +73,18 @@
             $this->translationsCacheDir = $translationsCacheDir;
             $this->bTranslationAllowShowKeys = $translationsAllowShowKeys;
             $this->file = $this->translationsDir.'/'.$lang.'.txt';
-            $this->cacheFile = $this->translationsCacheDir.'/HAPLO-TRANSLATIONS-'.md5($lang).'.cache';
             
             if (!file_exists($this->file)) {
-                throw new HaploException("Specified language file ($this->lang) does not exist.");
+                $this->file = $this->translationsDir.'/'.$defaultLang.'.txt';
+                
+                if (file_exists($this->file)) {
+                    $this->lang = $this->defaultLang;
+                } else {
+                    throw new HaploException("Specified language file ($this->lang) and default ($this->defaultLang) do not exist.");
+                }
             }
+            
+            $this->cacheFile = $this->translationsCacheDir.'/HAPLO-TRANSLATIONS-'.md5($lang).'.cache';
             
             // after first pass translations are stored in serialised PHP array for speed
             // does a cache exist for the selected language

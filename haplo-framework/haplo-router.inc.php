@@ -8,7 +8,7 @@
      * @copyright Brightfish Software Limited, 2008-2010. See license.txt for more details.
      * @package HaploRouter
      **/
-    class HaploRouter {
+    class HaploRouter extends HaploSingleton {
         /**
          * Stores URL mappings passed to the class on instantiation
          *
@@ -41,9 +41,28 @@
          * @return void
          * @author Ed Eliot
          **/
-        public function __construct($urls, $actionsPath = HAPLO_ACTIONS_PATH) {
+        protected function __construct($urls, $actionsPath = HAPLO_ACTIONS_PATH) {
             $this->urls = $urls;
             $this->actionsPath = $actionsPath;
+        }
+        
+        /**
+         * Static helper method used to ensure only one instance of the class is instantiated
+         * This overrides the base version in the abstract HaploSingleton class because we 
+         * need to support parameters and because PHP < 5.3 doesn't support late static binding
+         *
+         * @param array $urls URL pattern mappings t0 process - the first match found will be selected
+         * @param string $actionsPath Path to folder which contains actions (by default ../actions relative to index.php)
+         * @return HaploRouter
+         * @author Ed Eliot
+         **/
+        public static function get_instance($urls, $actionsPath = HAPLO_ACTIONS_PATH) {
+            $class = __CLASS__;
+            
+            if (!isset(self::$instances[$class])) {
+                self::$instances[$class] = new $class($urls, $actionsPath);
+            }
+            return self::$instances[$class];
         }
         
         /**
@@ -82,7 +101,7 @@
          * @author Ed Eliot
          **/
         public function get_request_var($name, $default = null) {
-            if (isset($this->requestVars[$name])) {
+            if (!empty($this->requestVars[$name])) {
                 return $this->requestVars[$name];
             }
             return $default;

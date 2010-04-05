@@ -7,6 +7,9 @@
      * @copyright Brightfish Software Limited, 2008-2010. See license.txt for more details.
      * @package Haplo init file
      **/
+     
+     error_reporting(E_ALL);
+     ini_set('display_errors', 'On');
     
     /** path to Haplo Framework- the same files can be used by multiple projects so 
      * move the haplo-framework directory wherever best suits your set up and update 
@@ -90,6 +93,7 @@
     define('HAPLO_CACHE_PATH', '../cache');
     
     // include Haplo Framework files - enable or disable as required
+    require(HAPLO_FRAMEWORK_PATH.'/haplo-singleton.inc.php');
     require(HAPLO_FRAMEWORK_PATH.'/haplo-setup.inc.php');
     require(HAPLO_FRAMEWORK_PATH.'/haplo-timing.inc.php');
     require(HAPLO_FRAMEWORK_PATH.'/haplo-exception.inc.php');
@@ -100,4 +104,5 @@
     require(HAPLO_FRAMEWORK_PATH.'/haplo-template.inc.php');
     require(HAPLO_FRAMEWORK_PATH.'/haplo-translations.inc.php');
     require(HAPLO_FRAMEWORK_PATH.'/haplo-cache.inc.php');
+    require(HAPLO_FRAMEWORK_PATH.'/haplo-action.inc.php');
 ?>

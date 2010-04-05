@@ -9,10 +9,22 @@
     class HaploTiming {
         protected static $startTime;
         
+        /**
+         * Start timing script
+         *
+         * @return void
+         * @author Ed Eliot
+         **/
         public static function start_timer() {
             self::$startTime = microtime(true);
         }
         
+        /**
+         * Stop timing script and output time taken
+         *
+         * @return void
+         * @author Ed Eliot
+         **/
         public static function shutdown() {
             if (HAPLO_SHOW_TIMING) {
                 echo '
@@ -34,7 +46,9 @@
         } 
     }
     
+    // start timing
     HaploTiming::start_timer();
     
+    // register shutdown function to output time taken
     register_shutdown_function(array('HaploTiming', 'shutdown'));
 ?>
