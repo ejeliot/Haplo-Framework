@@ -31,10 +31,10 @@
             if ($requestMethod == 'post') {
                 $this->do_post();
                 
-                if ($this->validate()) {
-                    $this->validate_success();
+                if ($this->do_validate()) {
+                    $this->do_validate_success();
                 } else {
-                    $this->validate_failure();
+                    $this->do_validate_failure();
                 }
             } else {
                 $this->do_post_other();
@@ -88,9 +88,10 @@
         public function __call($name, $arguments) {
             if (!in_array($name, array(
                 'do_get', 'do_post', 'do_head', 'do_put', 'do_delete', 'do_get_other', 
-                'do_post_other', 'do_head_other', 'do_put_other', 'do_delete_other', 'do_all'
+                'do_post_other', 'do_head_other', 'do_put_other', 'do_delete_other', 'do_all', 
+                'do_validate', 'do_validate_success', 'do_validate_failure'
             ))) {
-                throw HaploException("Method $name not defined.");
+                throw new HaploException("Method $name not defined.");
             }
         }
         

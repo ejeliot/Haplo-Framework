@@ -61,7 +61,7 @@
          * @author Ed Eliot
          **/         
         public function get_request_var($type, $name, $filter = FILTER_SANITIZE_STRING, $options = array()) {
-            if (!isset($this->requestVars[$type][$name])) {
+            if (isset($this->requestVars[$type][$name])) {
                 return filter_var($this->requestVars[$type][$name], $filter, $options);
             }
             return false;
