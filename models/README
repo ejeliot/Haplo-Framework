@@ -1,0 +1,4 @@
+Haplo Framework doesn't include an ORM or enforce a particular structure for models.
+You can add your modules here or anywhere else and use a third party ORM such as 
+Doctrine, Propel, Outlet, a database abstraction layer such as PDO or a native DB library 
+such as mysqli.
