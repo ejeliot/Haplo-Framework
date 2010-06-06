@@ -17,6 +17,7 @@
      * @copyright Brightfish Software Limited, 2008-2010. See license.txt for more details.
      **/
      
+     /* debug - remove for production */
      error_reporting(E_ALL);
      ini_set('display_errors', 1);
     
