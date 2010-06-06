@@ -1,8 +1,11 @@
-README
-======
-
 A lightweight PHP "MVC" like development framework.
+
+Focuses on:
+
+* Performance
+* Security
+* User friendly URLs
 
 See LICENSE for conditions of use.
 
-Still under active initial development - stuff may be broken. More to follow.
+Still under active initial development. Please let me know if you encounter any errors whilst using.
