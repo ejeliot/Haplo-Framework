@@ -61,17 +61,36 @@
          * @author Ed Eliot
          **/
         public function __construct(
-            $lang = HAPLO_TRANSLATIONS_DEFAULT_LANG, 
-            $defaultLang = HAPLO_TRANSLATIONS_DEFAULT_LANG,
-            $translationsDir = HAPLO_TRANSLATIONS_PATH,
-            $translationsCacheDir = HAPLO_CACHE_PATH,
-            $translationsAllowShowKeys = HAPLO_TRANSLATIONS_ALLOW_SHOW_KEYS
+            $lang = null, 
+            $defaultLang = null,
+            $translationsDir = null,
+            $translationsCacheDir = null,
+            $translationsAllowShowKeys = null
         ) {
+            global $config;
+            
             // set up file paths
-            $this->lang = strtolower($lang);
-            $this->translationsDir = $translationsDir;
-            $this->translationsCacheDir = $translationsCacheDir;
-            $this->bTranslationAllowShowKeys = $translationsAllowShowKeys;
+            if (!is_null($lang)) {
+                $this->lang = strtolower($lang);
+            } else {
+                $this->lang = $config->get_key('translations', 'default');
+            }
+            if (!is_null($translationsDir)) {
+                $this->translationsDir = $translationsDir;
+            } else {
+                $this->translationsDir = $config->get_key('paths', 'translations');
+            }
+            if (!is_null($translationsCacheDir)) {
+                $this->translationsCacheDir = $translationsCacheDir;
+            } else {
+                $this->translationsCacheDir = $config->get_key('paths', 'cache');
+            }
+            if (!is_null($translationsAllowShowKeys)) {
+                $this->translationAllowShowKeys = $translationsAllowShowKeys;
+            } else {
+                $this->translationAllowShowKeys = $config->get_key('translations', 'allowShowKeys');
+            }
+            
             $this->file = $this->translationsDir.'/'.$lang.'.txt';
             
             if (!file_exists($this->file)) {

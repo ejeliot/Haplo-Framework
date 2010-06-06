@@ -18,7 +18,9 @@
          * @author Ed Eliot
          **/
         public static function handler($errorNo, $errorStr, $errorFile, $errorLine) {
-            if (HAPLO_SHOW_ERRORS) {
+            global $config;
+            
+            if ($config->get_key('errors', 'show')) {
                 switch ($errorNo) {
                     case E_NOTICE:
                     case E_USER_NOTICE:
@@ -41,7 +43,7 @@
                 printf('
                     <div class="haplo-error">
                         <p><strong>Haplo Framework Error</strong></p>
-                        <pre><strong>%s:</strong> %s <strong>in</strong> %s <strong>on</strong> %s</pre>
+                        <p><strong>%s:</strong> %s <strong>in</strong> %s <strong>on</strong> %s</p>
                     </div>
                 ', $errorType, $errorStr, $errorFile, $errorLine);
             }

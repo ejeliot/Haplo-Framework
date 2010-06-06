@@ -40,11 +40,9 @@
             return '
                 <style type="text/css">
                     .haplo-error { border: 2px solid #ff9900; background: #eee; padding: 10px; margin: 10px 0; }
-                    .haplo-error * { padding: 0; margin: 0; font-family: Arial; font-size: 14px; }
-                    .haplo-error p, .haplo-error pre { margin: 5px; }
-                    .haplo-error pre { font-family: Courier New; white-space: pre-wrap; }
+                    .haplo-error * { padding: 0; margin: 0; font-family: Helvetica, Arial, sans-serif; font-size: 14px; }
+                    .haplo-error p { margin: 5px; }
                     .haplo-error strong { font-weight: bold; }
-                    .haplo-error pre strong { font-size: 12px; }
                 </style>
             ';
         }
@@ -57,12 +55,14 @@
          * @author Ed Eliot
          **/
         public static function handler($exception) {
-            if (HAPLO_SHOW_EXCEPTIONS) {
+            global $config;
+            
+            if ($config->get_key('exceptions', 'show')) {
                 echo self::get_error_css();
                 printf('
                     <div class="haplo-error">
                         <p><strong>Haplo Framework Exception</strong></p>
-                        <pre>%s</pre>
+                        <p>%s</p>
                     </div>
                 ', $exception);
             }

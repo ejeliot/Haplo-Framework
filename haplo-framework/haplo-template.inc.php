@@ -42,13 +42,17 @@
          * @return void
          * @author Ed Eliot
          **/
-        public function __construct($filename, $filePaths = HAPLO_TEMPLATE_PATHS) {
+        public function __construct($filename) {
+            global $config;
+            
             if (!preg_match('/[a-z0-9\/_-]+\.php/i', $filename)) {
-                throw new Exception("Invalid template filename specified ($filename). Characters allowed in the filename are a-z, 0-9, _ and -. The filename must also end in .php");
+                throw new Exception(
+                    "Invalid template filename specified ($filename). Characters allowed in the filename are a-z, 0-9, _ and -. The filename must also end in .php"
+                );
             }
             
             $this->filename = $filename;
-            $this->filePaths = explode(',', $filePaths);
+            $this->filePaths = explode(',', $config->get_key('paths', 'templates'));
         }
         
         /**
@@ -60,7 +64,9 @@
          * @author Ed Eliot
          **/
         public function __call($name, $args) {
-            $file = HAPLO_TEMPLATE_CUSTOM_FUNCTION_PATH.'/'.str_replace('-', '_', strtolower($name)).'.php';
+            global $config;
+            
+            $file = $config->get_key('paths', 'customTemplateFunctions').'/'.str_replace('-', '_', strtolower($name)).'.php';
             
             if (file_exists($file)) {
                 require_once($file);
@@ -108,11 +114,25 @@
         public function set(
             $name, 
             $value, 
-            $stripHtml = HAPLO_TEMPLATE_STRIP_HTML, 
-            $convertEntities = HAPLO_TEMPLATE_CONVERT_ENTITIES, 
-            $charSet = HAPLO_TEMPLATE_ENCODING
+            $stripHtml = null, 
+            $convertEntities = null, 
+            $charSet = null
         ) {
+            global $config;
+            
             $this->vars[$name] = $value;
+            
+            if (is_null($stripHtml)) {
+                $stripHtml = $config->get_key('templates', 'stripHtml');
+            }
+            
+            if (is_null($convertEntities)) {
+                $convertEntities = $config->get_key('templates', 'convertEntities');
+            }
+            
+            if (is_null($charSet)) {
+                $charSet = $config->get_key('templates', 'encoding');
+            }
 
             // variable value might be a reference to a sub-template
             if (!($value instanceof HaploTemplate) && is_scalar($value)) {
@@ -134,7 +154,13 @@
          * @return void
          * @author Ed Eliot
          **/
-        public function add_post_filter($functionName, $filePath = HAPLO_TEMPLATE_POSTFILTERS_PATH) {
+        public function add_post_filter($functionName, $filePath = null) {
+            global $config;
+            
+            if (is_null($filePath)) {
+                $filePath = $config->get_key('paths', 'postFilters');
+            }
+            
             $postfilter = $filePath.'/'.str_replace('_', '-', strtolower($functionName)).'.php';
             if (file_exists($postfilter)) {
                 require_once($postfilter);

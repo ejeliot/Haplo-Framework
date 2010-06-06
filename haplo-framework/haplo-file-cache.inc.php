@@ -22,9 +22,11 @@
          * @return void
          * @author Ed Eliot
          **/
-        public function __construct($key, $cacheTime, $cachePath = HAPLO_FILE_CACHE_PATH) {
+        public function __construct($key, $cacheTime) {
+            global $config;
+            
             $this->shortKey = 'HAPLO-CACHE-'.md5($key);
-            $this->file = "$cachePath.'/'.$this->shortKey.txt";
+            $this->file = $config->get_key('paths', 'cache')."/$this->shortKey.txt";
             $this->fileLock = "$this->file.lock";
             $this->cacheTime = $cacheTime;
         }

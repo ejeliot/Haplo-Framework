@@ -34,6 +34,22 @@
         protected $actionsPath;
         
         /**
+         * Raw action name (as specified in URL mapping)
+         *
+         * @access protected
+         * @var string
+         **/
+        protected $action;
+        
+        /**
+         * Path to selected action
+         *
+         * @access protected
+         * @var string
+         **/
+        protected $actionPath;
+        
+        /**
          * Constructor for class
          *
          * @param array $urls URL pattern mappings to process - the first match found will be selected
@@ -41,7 +57,7 @@
          * @return void
          * @author Ed Eliot
          **/
-        protected function __construct($urls, $actionsPath = HAPLO_ACTIONS_PATH) {
+        protected function __construct($urls, $actionsPath) {
             $this->urls = $urls;
             $this->actionsPath = $actionsPath;
         }
@@ -56,11 +72,13 @@
          * @return HaploRouter
          * @author Ed Eliot
          **/
-        public static function get_instance($urls, $actionsPath = HAPLO_ACTIONS_PATH) {
+        public static function get_instance($urls) {
+            global $config;
+            
             $class = __CLASS__;
             
             if (!isset(self::$instances[$class])) {
-                self::$instances[$class] = new $class($urls, $actionsPath);
+                self::$instances[$class] = new $class($urls, $config->get_key('paths', 'actions'));
             }
             return self::$instances[$class];
         }
@@ -85,8 +103,27 @@
         public function get_action() {
             $this->process($this->urls);
             
+            if (!empty($this->actionPath)) {
+                return $this->actionPath;
+            }
+            return false;
+        }
+        
+        /**
+         * Returns the class name corresponding to the selected action
+         *
+         * @return string the class name corresponding to the selected action
+         * @author Ed Eliot
+         **/
+        public function get_action_class() {
             if (!empty($this->action)) {
-                return $this->action;
+                $className = str_replace('-', ' ', $this->action);
+                $className = ucwords($className);
+                $className = str_replace(' ', '', $className);
+                
+                if (class_exists($className)) {
+                    return $className;
+                }
             }
             return false;
         }
@@ -117,7 +154,7 @@
         public function get_browser_locale($default = 'en-us') {
             if (
                 !empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) && 
-                preg_match('/[a-z-]+/i', $_SERVER['HTTP_ACCEPT_LANGUAGE'])
+                preg_match('^/[a-z-]+$/i', $_SERVER['HTTP_ACCEPT_LANGUAGE'])
             ) {
                 return strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']);
             }
@@ -208,10 +245,10 @@
                 header('HTTP/1.1 404 Not Found');
                 
                 // check for existence of a 404 action
-                if (file_exists("$this->actionsPath/404.php")) {
-                    $this->set_action('404');
+                if (file_exists("$this->actionsPath/page-not-found.php")) {
+                    $this->set_action('page-not-found');
                 } else {
-                    throw new HaploException("No default 404 action found. Add a file named 404.php to $this->actionsPath/ to suppress this message.");
+                    throw new HaploException("No default 404 action found. Add a file named page-not-found.php to $this->actionsPath/ to suppress this message.");
                 }
             }
             
@@ -234,12 +271,14 @@
                 $action = str_replace("<$key>", $value, $action);
             }
             
-            $action = "$this->actionsPath/$action.php";
+            $actionPath = "$this->actionsPath/$action.php";
             
-            if (file_exists($action)) {
+            if (file_exists($actionPath)) {
                 $this->action = $action;
+                $this->actionPath = $actionPath;
             } else {
                 $this->action = '';
+                $this->actionPath = '';
                 throw new HaploException("Specified action ($action) hasn't been created.");
             }
         }

@@ -9,6 +9,13 @@
      **/ 
     abstract class HaploAction extends HaploSingleton {
         /**
+         * Stores original options passed to class
+         *
+         * @var array
+         **/
+        protected $options;
+        
+        /**
          * Class constructor - not called directly as the class is instantiated as a Singleton
          *
          * @params array $options Key/value pair array containing references to router, translations and other objects
@@ -16,6 +23,8 @@
          * @author Ed Eliot
          **/
         protected function __construct($options) {
+            $this->options = $options;
+            
             foreach ($options as $key => $value) {
                 $this->$key = $value;
             }
@@ -117,13 +126,19 @@
         protected function do_404() {
             header('HTTP/1.1 404 Not Found');
             
-            $action = HAPLO_ACTIONS_PATH.'/404.php';
+            $actionsPath = $this->options->config->get_key('paths', 'actions');
+            $action = $actionsPath.'/page-not-found.php';
             
             if (file_exists($action)) {
                 require($action);
+                
+                if (class_exists('PageNotFound')) {
+                    PageNotFound::get_instance($this->options);
+                }
+                
                 exit;
             } else {
-                throw new HaploException('No default 404 action found. Add a file named 404.php to '.HAPLO_ACTIONS_PATH.' to suppress this message.');
+                throw new HaploException('No default 404 action found. Add a file named page-not-found.php to '.$actionsPath.' to suppress this message.');
             }
         }
     }

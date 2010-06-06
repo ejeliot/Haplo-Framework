@@ -26,20 +26,21 @@
          * @author Ed Eliot
          **/
         public static function shutdown() {
-            if (HAPLO_SHOW_TIMING) {
+            global $config;
+            
+            if ($config->get_key('timing', 'show')) {
                 echo '
                     <style type="text/css">
                         .haplo-timer { border: 2px solid #ff9900; background: #eee; padding: 10px; margin: 10px 0; }
-                        .haplo-timer * { padding: 0; margin: 0; font-family: Arial; font-size: 14px; }
+                        .haplo-timer * { padding: 0; margin: 0; font-family: Helvetica, Arial, sans-serif; font-size: 14px; }
                         .haplo-timer p, .haplo-timer pre { margin: 5px; }
-                        .haplo-timer pre { font-family: Courier New; white-space: pre-wrap; }
                         .haplo-timer strong { font-weight: bold; }
                     </style>
                 ';
                 printf('
                     <div class="haplo-timer">
                         <p><strong>Haplo Framework Timer</strong></p>
-                        <pre>Script execution time: %01.5f</pre>
+                        <p>Script execution time: %01.5f</p>
                     </div>', (microtime(true) - self::$startTime)
                 );
             }

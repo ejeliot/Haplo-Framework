@@ -16,8 +16,14 @@
          * @return object
          * @author Ed Eliot
          **/
-        public static function get_object($key, $cacheTime = HAPLO_CACHE_LENGTH, $type = HAPLO_CACHE_LIBRARY) {
-            $libraryPath = HAPLO_FRAMEWORK_PATH."/haplo-$type-cache.inc.php";
+        public static function get_object($key, $cacheTime = null) {
+            global $config;
+            
+            if (is_null($cacheTime)) {
+                $cacheTime = $config->get_key('cache', 'length');
+            }
+            $type = $config->get_key('cache', 'type');
+            $libraryPath = $config->get_key('paths', 'framework')."/haplo-$type-cache.inc.php";
             $libraryClassName = 'Haplo'.ucfirst($type).'Cache';
             
             if (file_exists($libraryPath)) {

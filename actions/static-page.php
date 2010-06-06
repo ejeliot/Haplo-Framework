@@ -43,13 +43,4 @@
             }
         }
     }
-    
-    /**
-     * instantiate the StaticPage class and pass in references to the 
-     * router and translation objects
-     **/
-    StaticPage::get_instance(array(
-        'router' => $router,
-        'translations' => $translations
-    ));
 ?>

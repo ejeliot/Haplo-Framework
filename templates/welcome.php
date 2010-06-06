@@ -6,7 +6,7 @@
     <title>Welcome to the Haplo Framework</title>
     <style type="text/css">
         .haplo { border: 2px solid #ff9900; background: #eee; padding: 10px; margin: 10px 0; }
-        .haplo * { padding: 0; margin: 0; font-family: Courier New, serif; font-size: 14px; }
+        .haplo * { padding: 0; margin: 0; font-family: Helvetica, Arial, sans-serif; font-size: 14px; }
         .haplo h1, .haplo p, .haplo ul { margin: 5px; }
         .haplo h2 { margin: 20px 5px; }
         .haplo h1 { font-size: 20px; }
@@ -25,7 +25,7 @@
             <li>PHP templating</li>
             <li>A translations library</li>
             <li>Caching (file based or memcached)</li>
-            <li>Sanitisation of $_GET and $_POST input variables and automatic protection against cross site scripting (XSS).</li>
+            <li>Automatic protection against cross site scripting (XSS).</li>
             <li>Page timing functionality</li>
         </ul>
         <h2>Requirements</h2>
@@ -33,7 +33,7 @@
             <li>PHP 5</li>
             <li>mod rewrite for friendly URLs (without /index.php/)</li>
         </ul>
-        <p class="copyright">Haplo Framework - copyright &copy; 2010 Brightfish Software/Ed Eliot. BSD License (see code for license details).</p>
+        <p class="copyright">Haplo Framework - Copyright &copy; 2010 Brightfish Software/Ed Eliot. BSD License (see LICENSE for details).</p>
     </div>
 </body>
 

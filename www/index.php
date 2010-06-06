@@ -16,38 +16,30 @@
      * @author Ed Eliot
      * @copyright Brightfish Software Limited, 2008-2010. See license.txt for more details.
      **/
+     
+     error_reporting(E_ALL);
+     ini_set('display_errors', 1);
     
     /**
      * include framework libraries and initial config
-     * if you want to modify some of the settings specified in this file 
-     * or include only parts of the Haplo Framework then you're probably 
-     * best to create your own copy and link to that instead
      **/
-    require('../includes/haplo-init.inc.php');
-    // require('../includes/haplo-init-custom.inc.php');
+    require('../haplo-framework/haplo-init.inc.php');
     
     // set up URL mappings
     $urls = array(
+        // an example of 301 redirecting URLs without trailing slash to corresponding 
+        // URLs with trailing slash (exclude paths ending with .html)
+        '/(?<path>.+[^/|\.html])' => array(
+            'type' => 'redirect',
+            'url' => '/<path>/',
+            'code' => 301
+        ),
+        // map everyting else to static-page action
         '/(?<template>[a-z0-9/-]*)' => 'static-page',
     );
     
-    // check that the framework is set up correctly
-    HaploSetup::validate();
-    
     // create an instance of the router
     $router = HaploRouter::get_instance($urls);
-    
-    /**
-     * filter input variables - GET, POST 
-     * and REQUEST and apply other security settings
-     * this line is optional but I strongly recommend adding it 
-     * as it offers some basic protection against use of unfiltered 
-     * content
-     **/
-    $securityFilter = HaploInputProtect::get_instance();
-    
-    // Add protection against cross site request forgeries (CSRF) in forms
-    $csrfProtect = HaploCsrfProtect::get_instance();
     
     /**
      * set up support for translations
@@ -60,5 +52,13 @@
     // load selected action
     if ($action = $router->get_action()) {
         require($action);
+        
+        if ($actionClass = $router->get_action_class()) {
+            $actionClass::get_instance(array(
+                'router' => $router,
+                'translations' => $translations,
+                'config' => $config // global config object - instantiated in haplo-init.inc.php
+            ));
+        }
     }
 ?>
