@@ -23,7 +23,7 @@
          * @author Ed Eliot
          **/
         protected function __construct() {
-            $this->config['files'] = array();
+            $this->config['_files'] = array();
             
             if (is_dir(HAPLO_CONFIG_PATH)) {
                 $files = $this->get_files(HAPLO_CONFIG_PATH);

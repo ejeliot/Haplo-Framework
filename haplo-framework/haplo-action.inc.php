@@ -126,7 +126,7 @@
         protected function do_404() {
             header('HTTP/1.1 404 Not Found');
             
-            $actionsPath = $this->options->config->get_key('paths', 'actions');
+            $actionsPath = $this->config->get_key('paths', 'actions');
             $action = $actionsPath.'/page-not-found.php';
             
             if (file_exists($action)) {
