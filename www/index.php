@@ -55,11 +55,12 @@
         require($action);
         
         if ($actionClass = $router->get_action_class()) {
-            $actionClass::get_instance(array(
+            // should be able to user $action::get_instance() but it isn't supported in PHP < 5.3
+            call_user_func_array(array($actionClass, 'get_instance'), array(array(
                 'router' => $router,
                 'translations' => $translations,
                 'config' => $config // global config object - instantiated in haplo-init.inc.php
-            ));
+            )));
         }
     }
 ?>
