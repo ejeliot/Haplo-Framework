@@ -30,7 +30,10 @@
                 require_once($libraryPath);
                 return new $libraryClassName($key, $cacheTime);
             } else {
-                throw new HaploException("Cache library ($libraryClassName) not found.");
+                throw new HaploException(
+                    "Cache library ($libraryClassName) not found.", 
+                    HAPLO_LIBRARY_NOT_FOUND_EXCEPTION
+                );
             }
         }
     }

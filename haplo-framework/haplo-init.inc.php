@@ -1,39 +1,37 @@
 <?php
     /**
-     * Haplo init - default framework config file - create your own in you 
-     * want to modify default set up
+     * Haplo init - default framework config file - create your own and 
+     * link to that in index.php instead if you want to modify the default 
+     * set up - don't forget most configuration can be changed by creating 
+     * override ini files instead
      *
      * @author Ed Eliot
      * @copyright Brightfish Software Limited, 2008-2010. See license.txt for more details.
      * @package Haplo init file
      **/
-     
-    /**
-     * path to haplo framework directory
-     **/
-    define('HAPLO_FRAMEWORK_PATH', '../haplo-framework');
-      
-    /**
-     * path to haplo config directory
-     **/
-    define('HAPLO_CONFIG_PATH', '../config');
     
-    // include Haplo Framework files - enable or disable as required
-    require(HAPLO_FRAMEWORK_PATH.'/haplo-exception.inc.php');
-    require(HAPLO_FRAMEWORK_PATH.'/haplo-error.inc.php');
-    require(HAPLO_FRAMEWORK_PATH.'/haplo-singleton.inc.php');
-    require(HAPLO_FRAMEWORK_PATH.'/haplo-setup.inc.php');
-    require(HAPLO_FRAMEWORK_PATH.'/haplo-timing.inc.php');
-    require(HAPLO_FRAMEWORK_PATH.'/haplo-router.inc.php');
-    require(HAPLO_FRAMEWORK_PATH.'/haplo-template.inc.php');
-    require(HAPLO_FRAMEWORK_PATH.'/haplo-translations.inc.php');
-    require(HAPLO_FRAMEWORK_PATH.'/haplo-cache.inc.php');
-    require(HAPLO_FRAMEWORK_PATH.'/haplo-action.inc.php');
-    require(HAPLO_FRAMEWORK_PATH.'/haplo-config.inc.php');
+    require('haplo-singleton.inc.php');
+    require('haplo-config.inc.php');
     
     // get instance of config helper
+    // has to be instantated before the next set of includdes 
+    // as they use the config object
     $config = HaploConfig::get_instance();
     
-    // check that the framework is set up correctly
-    HaploSetup::validate();
+    // include Haplo Framework files - enable or disable as required
+    require('haplo-error.inc.php');
+    require('haplo-exception.inc.php');
+    require('haplo-timing.inc.php');
+    require('haplo-router.inc.php');
+    require('haplo-template.inc.php');
+    require('haplo-translations.inc.php');
+    require('haplo-cache.inc.php');
+    require('haplo-action.inc.php');
+    require('haplo-nonce.inc.php');
+    
+    // this checks that certain options are set correctly, directories 
+    // are writable where necessary etc - once you're happy everything is 
+    // ok this can be safely commmented out or removed - no harm leaving it 
+    // here if you want to though
+    require('haplo-setup.inc.php');
 ?>

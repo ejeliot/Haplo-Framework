@@ -18,13 +18,15 @@
         protected static $instances;
         
         public function __clone() {
-            throw new HaploException('Cloning of '.self::$class.' not allowed.');
+            throw new HaploException(
+                'Cloning of '.self::$class.' not allowed.', 
+                HAPLO_CLONING_NOT_ALLOWED_EXCEPTION
+            );
         }
         
         /**
          * define a get_instance() method in the inherited class
-         * we can't define it here due to differing parameters and a lack of support 
-         * for late static binding in PHP < 5.3
+         * we can't define it here due to differing parameters
          **/
     }
 ?>

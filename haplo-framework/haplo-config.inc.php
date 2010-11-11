@@ -25,9 +25,9 @@
         protected function __construct() {
             $this->config['_files'] = array();
             
-            if (is_dir(HAPLO_CONFIG_PATH)) {
-                $files = $this->get_files(HAPLO_CONFIG_PATH);
-                $this->parse_files(HAPLO_CONFIG_PATH, $files);
+            if (is_dir(APP_CONFIG_PATH)) {
+                $files = $this->get_files(APP_CONFIG_PATH);
+                $this->parse_files(APP_CONFIG_PATH, $files);
             }
         }
         
@@ -70,7 +70,10 @@
                     $this->config = array_merge($this->config, $config);
                     $this->config['_files'][] = "$path/$file";
                 } else {
-                    throw new HaploException("Couldn't parse configuration file ($path/$file)");
+                    throw new HaploException(
+                        "Couldn't parse configuration file ($path/$file)", 
+                        HAPLO_CONFIG_PARSE_FILE_EXCEPTION
+                    );
                 }
             }
         }
@@ -84,7 +87,7 @@
          * @author Ed Eliot
          **/
         public static function get_instance() {
-            $class = __CLASS__;
+            $class = get_called_class();
             
             if (!isset(self::$instances[$class])) {
                 self::$instances[$class] = new $class();
@@ -104,7 +107,18 @@
             if (isset($this->config[$section][$key])) {
                 return $this->config[$section][$key];
             } else {
-                throw new HaploException('Configuration key not found ('.$section.', '.$key.')');
+                throw new HaploException(
+                    'Configuration key not found ('.$section.', '.$key.')', 
+                    HAPLO_CONFIG_KEY_NOT_FOUND_EXCEPTION
+                );
+            }
+        }
+        
+        public function get_key_or_default($section, $key, $default = '') {
+            try {
+                return $this->get_key($section, $key);
+            } catch (HaploException $e) {
+                return $default;
             }
         }
         
@@ -119,7 +133,10 @@
             if (isset($this->config[$section])) {
                 return $this->config[$section];
             } else {
-                throw new HaploException('Configuration section not found ('.$section.')');
+                throw new HaploException(
+                    'Configuration section not found ('.$section.')', 
+                    HAPLO_CONFIG_SECTION_NOT_FOUND_EXCEPTION
+                );
             }
         }
         

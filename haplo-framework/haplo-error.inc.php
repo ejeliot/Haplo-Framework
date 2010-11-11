@@ -33,6 +33,7 @@
                     case E_ERROR:
                     case E_USER_ERROR:
                         $errorType = 'Fatal Error';
+                        exit(1);
                         break;
                     default:
                         $errorType = 'Unknown';
@@ -53,5 +54,5 @@
     }
     
     // set up custom error handler
-    set_error_handler(array('HaploError', 'handler'));
+    set_error_handler(array('HaploError', 'handler'), E_ALL);
 ?>

@@ -65,7 +65,7 @@
         /**
          * Static helper method used to ensure only one instance of the class is instantiated
          * This overrides the base version in the abstract HaploSingleton class because we 
-         * need to support parameters and because PHP < 5.3 doesn't support late static binding
+         * need to support parameters
          *
          * @param array $urls URL pattern mappings t0 process - the first match found will be selected
          * @param string $actionsPath Path to folder which contains actions (by default ../actions relative to index.php)
@@ -75,7 +75,7 @@
         public static function get_instance($urls) {
             global $config;
             
-            $class = __CLASS__;
+            $class = get_called_class();
             
             if (!isset(self::$instances[$class])) {
                 self::$instances[$class] = new $class($urls, $config->get_key('paths', 'actions'));
@@ -161,6 +161,26 @@
             return $default;
         }
         
+        public function get_request_uri() {
+            echo $_SERVER['REQUEST_URI'];
+        }
+        
+        public function get_remote_addr() {
+            if (!empty($_SERVER['X_HTTP_FORWARDED_FOR'])) {
+                return $_SERVER['X_HTTP_FORWARDED_FOR'];
+            }
+            
+            return $_SERVER['REMOTE_ADDR'];
+        }
+        
+        public function get_referer() {
+            if (!empty($_SERVER['HTTP_REFERER'])) {
+                return $_SERVER['HTTP_REFERER'];
+            }
+            
+            return false;
+        }
+        
         /**
          * Logic to work out which view should be loaded and process parameters
          *
@@ -182,7 +202,7 @@
                 $regExRaw = str_replace('/', '\/', $regEx);
                 
                 // does the current URL match - if so capture matched sub-groups
-                if (preg_match("/^$regExRaw$/i", $_SERVER['REQUEST_URI'], $this->requestVars)) {
+                if (preg_match("/^$regExRaw$/", $_SERVER['REQUEST_URI'], $this->requestVars)) {
                     // the first match is the full URL - we not really 
                     // interested in that so drop
                     array_shift($requestVars);
@@ -198,7 +218,10 @@
                                     if (!empty($dest['action'])) {
                                         $this->set_action($dest['action'], $this->requestVars);
                                     } else {
-                                        throw new HaploException("No action defined for $regEx.");
+                                        throw new HaploException(
+                                            "No action defined for $regEx.", 
+                                            HAPLO_NO_ACTION_DEFINED_EXCEPTION
+                                        );
                                     }
                                     break;
                                 // performs http redirect (301, 302, 404 etc)
@@ -210,7 +233,10 @@
                                             $this->redirect($dest['url']);
                                         }
                                     } else {
-                                        throw new HaploException("No redirect URL defined for $regEx.");
+                                        throw new HaploException(
+                                            "No redirect URL defined for $regEx.", 
+                                            HAPLO_NO_REDIRECT_URL_DEFINED_EXCEPTION
+                                        );
                                     }
                                     break;
                                 case 'sub-patterns':
@@ -224,10 +250,16 @@
                                     $this->process($subPatterns);
                                     break;
                                 default:
-                                    throw new HaploException("Action type not supported for $regEx. Should be one of 'action', 'redirect' or 'sub-patterns'.");
+                                    throw new HaploException(
+                                        "Action type not supported for $regEx. Should be one of 'action', 'redirect' or 'sub-patterns'.", 
+                                        HAPLO_ACTION_TYPE_NOT_SUPPORTED_EXCEPTION
+                                    );
                             }
                         } else {
-                            throw new HaploException("No action type defined for $regEx. Should be one of 'action', 'redirect' or 'sub-patterns'.");
+                            throw new HaploException(
+                                "No action type defined for $regEx. Should be one of 'action', 'redirect' or 'sub-patterns'.", 
+                                HAPLO_NO_ACTION_DEFINED_EXCEPTION
+                            );
                         }
                     } else {
                         $this->set_action($dest);
@@ -248,7 +280,10 @@
                 if (file_exists("$this->actionsPath/page-not-found.php")) {
                     $this->set_action('page-not-found');
                 } else {
-                    throw new HaploException("No default 404 action found. Add a file named page-not-found.php to $this->actionsPath/ to suppress this message.");
+                    throw new HaploException(
+                        "No default 404 action found. Add a file named page-not-found.php to $this->actionsPath/ to suppress this message.", 
+                        HAPLO_NO_DEFAULT_404_DEFINED_EXCEPTION
+                    );
                 }
             }
             
@@ -279,7 +314,10 @@
             } else {
                 $this->action = '';
                 $this->actionPath = '';
-                throw new HaploException("Specified action ($action) hasn't been created.");
+                throw new HaploException(
+                    "Specified action ($action) hasn't been created.", 
+                    HAPLO_ACTION_NOT_FOUND_EXCEPTION
+                );
             }
         }
         

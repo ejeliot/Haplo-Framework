@@ -16,6 +16,22 @@
         protected $options;
         
         /**
+         * Stores details of the order in which methods are run
+         * Override to change order
+         *
+         * @var array
+         **/
+        protected $methodOrder = array(
+            'do_init', 
+            'do_get', 
+            'do_post', 
+            'do_head', 
+            'do_put', 
+            'do_delete', 
+            'do_all'
+        );
+        
+        /**
          * Class constructor - not called directly as the class is instantiated as a Singleton
          *
          * @params array $options Key/value pair array containing references to router, translations and other objects
@@ -31,43 +47,34 @@
             
             $requestMethod = $this->get_request_method();
             
-            if ($requestMethod == 'get') {
-                $this->do_get();
-            } else {
-                $this->do_get_other();
-            }
-            
-            if ($requestMethod == 'post') {
-                $this->do_post();
+            foreach ($this->methodOrder as $methodType) {
+                $methodName = $methodType;
                 
-                if ($this->do_validate()) {
-                    $this->do_validate_success();
+                if (in_array($methodType, array(
+                    'do_get', 
+                    'do_post', 
+                    'do_head', 
+                    'do_put', 
+                    'do_delete'
+                ))) {
+                    if ("do_$requestMethod" == $methodType) {
+                        $this->$methodName();
+                        
+                        if ($requestMethod == 'post') {
+                            if ($this->do_validate()) {
+                                $this->do_validate_success();
+                            } else {
+                                $this->do_validate_failure();
+                            }
+                        }
+                    } else {
+                        $methodName .= '_other';
+                        $this->$methodName();
+                    }
                 } else {
-                    $this->do_validate_failure();
+                    $this->$methodName();
                 }
-            } else {
-                $this->do_post_other();
             }
-            
-            if ($requestMethod == 'head') {
-                $this->do_head();
-            } else {
-                $this->do_head_other();
-            }
-            
-            if ($requestMethod == 'put') {
-                $this->do_put();
-            } else {
-                $this->do_put_other();
-            }
-            
-            if ($requestMethod == 'delete') {
-                $this->do_delete();
-            } else {
-                $this->do_delete_other();
-            }
-            
-            $this->do_all();
         }
         
         /**
@@ -75,11 +82,12 @@
          *
          * @static
          * @param array $options Key/value pair array containing references to router, translations and other objects
-         * @param string $class This is never set, it simply ensures the right class name is used in the descendent class
          * @return HaploAction (descendent class)
          * @author Ed Eliot
          **/
-        public static function get_instance($options = array(), $class = __CLASS__) {
+        public static function get_instance($options = array()) {
+            $class = get_called_class();
+            
             if (!isset(self::$instances[$class])) {
                 self::$instances[$class] = new $class($options);
             }
@@ -96,11 +104,14 @@
          **/
         public function __call($name, $arguments) {
             if (!in_array($name, array(
-                'do_get', 'do_post', 'do_head', 'do_put', 'do_delete', 'do_get_other', 
+                'do_init', 'do_get', 'do_post', 'do_head', 'do_put', 'do_delete', 'do_get_other', 
                 'do_post_other', 'do_head_other', 'do_put_other', 'do_delete_other', 'do_all', 
                 'do_validate', 'do_validate_success', 'do_validate_failure'
             ))) {
-                throw new HaploException("Method $name not defined.");
+                throw new HaploException(
+                    sprintf('Method %s not defined in %s.', $name, get_called_class()), 
+                    HAPLO_METHOD_NOT_FOUND_EXCEPTION
+                );
             }
         }
         
@@ -138,7 +149,10 @@
                 
                 exit;
             } else {
-                throw new HaploException('No default 404 action found. Add a file named page-not-found.php to '.$actionsPath.' to suppress this message.');
+                throw new HaploException(
+                    'No default 404 action found. Add a file named page-not-found.php to '.$actionsPath.' to suppress this message.', 
+                    HAPLO_ACTION_NOT_FOUND_EXCEPTION
+                );
             }
         }
     }

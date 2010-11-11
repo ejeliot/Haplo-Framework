@@ -47,7 +47,8 @@
             
             if (!preg_match('/[a-z0-9\/_-]+\.php/i', $filename)) {
                 throw new Exception(
-                    "Invalid template filename specified ($filename). Characters allowed in the filename are a-z, 0-9, _ and -. The filename must also end in .php"
+                    "Invalid template filename specified ($filename). Characters allowed in the filename are a-z, 0-9, _ and -. The filename must also end in .php", 
+                    HAPLO_INVALID_TEMPLATE_EXCEPTION
                 );
             }
             
@@ -66,14 +67,17 @@
         public function __call($name, $args) {
             global $config;
             
-            $file = $config->get_key('paths', 'customTemplateFunctions').'/'.str_replace('-', '_', strtolower($name)).'.php';
+            $file = $config->get_key('paths', 'customTemplateFunctions').'/'.str_replace('_', '-', strtolower($name)).'.php';
             
             if (file_exists($file)) {
                 require_once($file);
                 
                 return call_user_func_array($name, $args);
             } else {
-                throw new HaploException("Custom template function ($name) not found in ($file).");
+                throw new HaploException(
+                    "Custom template function ($name) not found in ($file).", 
+                    HAPLO_CUSTOM_TEMPLATE_FUNCTION_NOT_FOUND_EXCEPTION
+                );
             }
         }
 
@@ -167,7 +171,10 @@
                 
                 $this->postFilters[] = $functionName;
             } else {
-                throw new HaploException("Post filter ($functionName) could not be found in ($filePath)");
+                throw new HaploException(
+                    "Post filter ($functionName) could not be found in ($filePath)", 
+                    HAPLO_POST_FILTER_FUNCTION_NOT_FOUND_EXCEPTION
+                );
             }
         }
 
@@ -212,7 +219,10 @@
             }
             
             if (!$templateFound) {
-                throw new HaploException("Template ($this->filename) doesn't exist on any of the specified search paths.\n\nSearch paths:\n\n".implode("\n", $this->filePaths));
+                throw new HaploException(
+                    "Template ($this->filename) doesn't exist on any of the specified search paths.\n\nSearch paths:\n\n".implode("\n", $this->filePaths), 
+                    HAPLO_TEMPLATE_NOT_FOUND_EXCEPTION
+                );
             }
             
             $output .= ob_get_clean();

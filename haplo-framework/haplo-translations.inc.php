@@ -99,7 +99,10 @@
                 if (file_exists($this->file)) {
                     $this->lang = $this->defaultLang;
                 } else {
-                    throw new HaploException("Specified language file ($this->lang) and default ($this->defaultLang) do not exist.");
+                    throw new HaploException(
+                        "Specified language file ($this->lang) and default ($this->defaultLang) do not exist.", 
+                        HAPLO_LANG_FILE_NOT_FOUND_EXCEPTION
+                    );
                 }
             }
             
@@ -140,7 +143,8 @@
             // read translation file into array
             $file = file($this->file);
             
-            // does this translation file inherit from another
+            // does this translation file inherit from another - only one level of inheritance 
+            // supported at the moment
             $inheritsMatches = array();
             if (isset($file[0]) && preg_match("/^\s*{inherits\s+([^}]+)}.*$/", $file[0], $inheritsMatches)) {
                 $parentFile = $this->translationsDir.trim($inheritsMatches[1]).'.txt';
@@ -212,7 +216,10 @@
                 }
             }
             // key / value doesn't exist, throw exception
-            throw new HaploException("Translation key ($key) does not exist in selected language file($this->file).");
+            throw new HaploException(
+                "Translation key ($key) does not exist in selected language file($this->file).", 
+                HAPLO_TRANSLATION_KEY_NOT_FOUND_EXCEPTION
+            );
         }
         
         /**
@@ -226,7 +233,10 @@
          **/
         public function get_plural($key, $qty) {
             // TODO: Implement get_plural functionality.
-            throw new HaploException("Method (get_plural) not implemented yet.");
+            throw new HaploException(
+                "Method (get_plural) not implemented yet.", 
+                HAPLO_METHOD_NOT_IMPLEMENTED_EXCEPTION
+            );
         }
     }
 ?>
