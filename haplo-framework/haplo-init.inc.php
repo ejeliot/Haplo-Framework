@@ -21,6 +21,7 @@
     // include Haplo Framework files - enable or disable as required
     require('haplo-error.inc.php');
     require('haplo-exception.inc.php');
+    require('haplo-session.inc.php');
     require('haplo-timing.inc.php');
     require('haplo-router.inc.php');
     require('haplo-template.inc.php');

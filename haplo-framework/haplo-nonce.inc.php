@@ -1,42 +1,38 @@
 <?php
-    class HaploNonce extends HaploSingleton {
-        protected function __construct() {
-            global $config;
+    class HaploNonce {
+        protected $secret;
+        protected $name;
+        
+        public function __construct($secret, $name = 'nonce') {
+            $this->secret = $secret;
+            $this->name = $name;
             
-            session_name($config->get_key('sessions', 'name'));
-            session_start();
+            $this->create();
         }
         
-        public function get_instance() {
-            $class = get_called_class();
-            
-            if (!isset(self::$instances[$class])) {
-                self::$instances[$class] = new $class();
-            }
-            return self::$instances[$class];
-        }
-        
-        public function create($name = 'nonce', $force = false) {
-            global $config;
-            
-            if (empty($_SESSION[$name]) || $force) {
-                $_SESSION[$name] = sha1($config->get_key('nonce', 'secret').uniqid());
-            
-                return $_SESSION[$name];
-            }
-            
-            return false;
-        }
-        
-        public function check($name = 'nonce') {
-            $result = (!empty($_SESSION[$name]) && $_SESSION[$name] == $_REQUEST[$name]);
-            $this->create($name, true);
+        public function check() {
+            $result = (
+                !empty($_SESSION[$this->name]) && 
+                !empty($_REQUEST[$this->name]) && 
+                $_SESSION[$this->name] == $_REQUEST[$this->name]
+            );
+            $this->create(true);
             
             return $result;
         }
         
-        public function get($name = 'nonce') {
-            return $_SESSION[$name];
+        public function get() {
+            return $_SESSION[$this->name];
+        }
+        
+        protected function create($force = false) {
+            if (empty($_SESSION[$this->name]) || $force) {
+                $_SESSION[$this->name] = sha1($this->secret.uniqid());
+            
+                return $_SESSION[$this->name];
+            }
+            
+            return false;
         }
     }
 ?>

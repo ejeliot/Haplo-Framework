@@ -39,13 +39,20 @@
             'url' => '/',
             'code' => 301
         ),
-        '/contact/' => 'contact',
+        '/nonce-example/' => 'nonce-example',
         // map everyting else to static-page action
         '/(?<template>[a-z0-9/-]*)' => 'static-page',
     );
     
     // create an instance of the router and pass in URL mappings
     $router = HaploRouter::get_instance($urls);
+    
+    // create new session
+    HaploSession::create(
+        $config->get_key('sessions', 'name'),
+        $config->get_key('sessions', 'store'),
+        $config->get_key('sessions', 'servers')
+    );
     
     /**
      * set up support for translations
@@ -54,10 +61,6 @@
     $translations = new HaploTranslations('en-us');
     // an example of using the locale specified by the browser
     // $translations = new HaploTranslations($router->get_browser_locale('en-us'));
-    
-    // simple library to help with implementing nonces to prevent CSRF attacks 
-    // by default one is created called "nonce", create others as necessary
-    $nonce = HaploNonce::get_instance();
     
     // load selected action
     if ($action = $router->get_action()) {
@@ -72,7 +75,6 @@
                 array(
                     'router' => $router,
                     'translations' => $translations,
-                    'nonce' => $nonce,
                     'config' => $config // global config object - instantiated in haplo-init.inc.php
                 )
             );

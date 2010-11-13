@@ -6,6 +6,7 @@
     <title><?php echo $metaTitle; ?></title>
     <meta name="description" content="<?php echo $metaDesc; ?>">
     <meta name="keywords" content="<?php echo $metaKeywords; ?>">
+    <!-- these styles would normally go in a separate stylesheet -->
     <style type="text/css">
         .haplo { border: 2px solid #ff9900; background: #eee; padding: 10px; margin: 10px 0; }
         .haplo * { padding: 0; margin: 0; font-family: Helvetica, Arial, sans-serif; font-size: 14px; }
@@ -13,6 +14,8 @@
         .haplo h2 { margin: 20px 5px; }
         .haplo h1 { font-size: 20px; }
         .haplo ul { margin: 10px 40px; }
+        .haplo th, .haplo td { padding: 5px; }
+        .haplo tbody tr:nth-child(odd) { background: #ccc; }
         .haplo .copyright { border-top: 1px solid #ccc; padding-top: 10px; margin: 20px 5px 0 5px; font-size: 12px; }
     </style>
 </head>
