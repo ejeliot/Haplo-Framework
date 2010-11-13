@@ -15,7 +15,7 @@
             session_regenerate_id();
         }
         
-        public static function use_memcache($servers) {
+        protected static function use_memcache($servers) {
             ini_set('session.save_handler', 'memcache');
             ini_set('session.save_path', $servers);
         }
