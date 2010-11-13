@@ -11,7 +11,7 @@
         
         // call this before logging a user in or calling other 
         // important functions
-        public static function regenerate_session() {
+        public static function regenerate() {
             session_regenerate_id();
         }
         
