@@ -155,5 +155,40 @@
                 );
             }
         }
+        
+        /**
+         * Redirect to another URL
+         *
+         * @param string $url URL to redirect to
+         * @param integer $code HTTP code to send
+         * @return void
+         * @author Ed Eliot
+         **/
+        protected function do_redirect($url, $code = 302) {
+            header("Location: $url", true, $code);
+            exit;
+        }
+        
+        /**
+         * Permanently redirect to another URL
+         *
+         * @param string $url URL to redirect to
+         * @return void
+         * @author Ed Eliot
+         **/
+        protected function do_301($url) {
+            $this->do_redirect($url, 301);
+        }
+        
+        /**
+         * Temporarily redirect to another URL
+         *
+         * @param string $url URL to redirect to
+         * @return void
+         * @author Ed Eliot
+         **/
+        protected function do_302($url) {
+            $this->do_redirect($url, 302);
+        }
     }
 ?>

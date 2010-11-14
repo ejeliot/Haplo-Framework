@@ -161,10 +161,22 @@
             return $default;
         }
         
+        /**
+         * Get request URI
+         *
+         * @return string
+         * @author Ed Eliot
+         **/
         public function get_request_uri() {
             echo $_SERVER['REQUEST_URI'];
         }
         
+        /**
+         * Get IP address of client, takes into account proxies
+         *
+         * @return string
+         * @author Ed Eliot
+         **/
         public function get_remote_addr() {
             if (!empty($_SERVER['X_HTTP_FORWARDED_FOR'])) {
                 return $_SERVER['X_HTTP_FORWARDED_FOR'];
@@ -173,12 +185,44 @@
             return $_SERVER['REMOTE_ADDR'];
         }
         
+        /**
+         * Get referring page
+         *
+         * @return string
+         * @author Ed Eliot
+         **/
         public function get_referer() {
             if (!empty($_SERVER['HTTP_REFERER'])) {
                 return $_SERVER['HTTP_REFERER'];
             }
             
             return false;
+        }
+        
+        /**
+         * Helper method to get the HTTP request method used
+         *
+         * @return string
+         * @author Ed Eliot
+         **/
+        public function get_request_method() {
+            if (!empty($_SERVER['REQUEST_METHOD'])) {
+                return strtolower($_SERVER['REQUEST_METHOD']);
+            }
+            return false;
+        }
+        
+        /**
+         * Check if the current request is made via AJAX
+         *
+         * @return boolean
+         * @author Ed Eliot
+         **/
+        public function is_ajax() {
+            return (
+                !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
+                strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'
+            );
         }
         
         /**

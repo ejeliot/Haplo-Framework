@@ -101,6 +101,22 @@
                         %s
                     </div>
                 ', $exception);
+            } else {
+                self::do_500();
+            }
+        }
+        
+        public function do_500() {
+            if (file_exists(HAPLO_SERVER_ERROR_PAGE)) {
+                require(HAPLO_SERVER_ERROR_PAGE);
+            } else {
+                echo self::get_error_css();
+                die(
+                    '<div class="haplo-error">
+                        <p><strong>Haplo Framework Exception</strong></p>
+                        <p>No default 500 page found. Add a file named server-error.php to '.HAPLO_SERVER_ERROR_PAGE.' to suppress this message.</p>
+                    </div>
+                ');
             }
         }
     }

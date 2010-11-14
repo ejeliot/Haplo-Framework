@@ -2,6 +2,9 @@
     // path to haplo framework directory
     define('HAPLO_FRAMEWORK_PATH', '../../haplo-framework');
     
+    // path to 500 error page
+    define('HAPLO_SERVER_ERROR_PAGE', '../templates/server-error.php');
+    
     // path to application config directory
     define('APP_CONFIG_PATH', '../config');
     

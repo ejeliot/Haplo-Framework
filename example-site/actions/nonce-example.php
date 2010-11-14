@@ -33,9 +33,9 @@
             $page = new HaploTemplate('_layout.php');
             
             // get meta information from config
-            $page->set('metaTitle', $this->config->get_key_or_default('nonce-example', 'metaTitle'));
-            $page->set('metaDesc', $this->config->get_key_or_default('nonce-example', 'metaDesc'));
-            $page->set('metaKeywords', $this->config->get_key_or_default('nonce-example', 'metaKeywords'));
+            $page->set('metaTitle', 'Nonce Example');
+            $page->set('metaDesc', '');
+            $page->set('metaKeywords', '');
             $page->set('translations', $this->translations);
             $page->set('message', $this->message);
             $page->set('nonce', $this->nonce->get());

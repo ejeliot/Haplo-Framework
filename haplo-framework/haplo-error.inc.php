@@ -47,6 +47,8 @@
                         <p><strong>%s:</strong> %s <strong>in</strong> %s <strong>on</strong> %s</p>
                     </div>
                 ', $errorType, $errorStr, $errorFile, $errorLine);
+            } else {
+                HaploException::do_500();
             }
         
             return true;
