@@ -178,8 +178,8 @@
          * @author Ed Eliot
          **/
         public function get_remote_addr() {
-            if (!empty($_SERVER['X_HTTP_FORWARDED_FOR'])) {
-                return $_SERVER['X_HTTP_FORWARDED_FOR'];
+            if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                return $_SERVER['HTTP_X_FORWARDED_FOR'];
             }
             
             return $_SERVER['REMOTE_ADDR'];
