@@ -60,15 +60,19 @@
                     if ("do_$requestMethod" == $methodType) {
                         $this->$methodName();
                         
-                        if ($requestMethod == 'post') {
-                            if ($this->do_validate()) {
-                                $this->do_validate_success();
+                        if (in_array($requestMethod, array('get', 'post')) {
+                            $methodName = 'do_'.$requestMethod.'_validate';
+                            
+                            if ($this->$validateMethodName()) {
+                                $methodName = 'do_'.$requestMethod.'_success()';
+                                $this->$methodName();
                             } else {
-                                $this->do_validate_failure();
+                                $methodNamr = 'do_'.$requestMethod.'_failure()';
+                                $this->$methodName();
                             }
                         }
                     } else {
-                        $methodName .= '_other';
+                        $methodName = str_replace('do_', 'do_all_except_', $methodName);
                         $this->$methodName();
                     }
                 } else {
@@ -104,9 +108,9 @@
          **/
         public function __call($name, $arguments) {
             if (!in_array($name, array(
-                'do_init', 'do_get', 'do_post', 'do_head', 'do_put', 'do_delete', 'do_get_other', 
-                'do_post_other', 'do_head_other', 'do_put_other', 'do_delete_other', 'do_all', 
-                'do_validate', 'do_validate_success', 'do_validate_failure'
+                'do_init', 'do_get', 'do_post', 'do_head', 'do_put', 'do_delete', 'do_all_except_get', 
+                'do_all_except_post', 'do_all_except_head', 'do_all_except_put', 'do_all_except_delete', 'do_all', 
+                'do_get_validate', 'do_get_success', 'do_get_failure', 'do_post_validate', 'do_post_success', 'do_post_failure'
             ))) {
                 throw new HaploException(
                     sprintf('Method %s not defined in %s.', $name, get_called_class()), 
