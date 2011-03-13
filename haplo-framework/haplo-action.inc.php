@@ -108,9 +108,11 @@
          **/
         public function __call($name, $arguments) {
             if (!in_array($name, array(
-                'do_init', 'do_get', 'do_post', 'do_head', 'do_put', 'do_delete', 'do_all_except_get', 
-                'do_all_except_post', 'do_all_except_head', 'do_all_except_put', 'do_all_except_delete', 'do_all', 
-                'do_get_validate', 'do_get_success', 'do_get_failure', 'do_post_validate', 'do_post_success', 'do_post_failure'
+                'do_init', 'do_get', 'do_post', 'do_head', 'do_put', 'do_delete', 
+                'do_all_except_get', 'do_all_except_post', 'do_all_except_head', 
+                'do_all_except_put', 'do_all_except_delete', 'do_all', 'do_get_validate', 
+                'do_get_success', 'do_get_failure', 'do_post_validate', 
+                'do_post_success', 'do_post_failure'
             ))) {
                 throw new HaploException(
                     sprintf('Method %s not defined in %s.', $name, get_called_class()), 
