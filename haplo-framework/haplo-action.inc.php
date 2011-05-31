@@ -32,6 +32,20 @@
         );
         
         /**
+         * Stores details of validation errors
+         *
+         * @var array
+         **/
+        protected $errors = array();
+        
+        /**
+         * Stores success status of form/action
+         *
+         * @var boolean
+         **/
+        protected $success = false;
+        
+        /**
          * Class constructor - not called directly as the class is instantiated as a Singleton
          *
          * @params array $options Key/value pair array containing references to router, translations and other objects
