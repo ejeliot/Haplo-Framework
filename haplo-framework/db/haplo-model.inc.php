@@ -17,7 +17,7 @@
     abstract class HaploModel {
         protected $db;
         
-        public function __contruct($dbConfig = 'db') {
+        public function __construct($dbConfig = 'db') {
             global $config;
             
             $this->db = HaploDb::get_instance(array(
