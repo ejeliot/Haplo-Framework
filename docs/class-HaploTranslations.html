@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="generator" content="ApiGen 2.4.0">
+
+	<title>Class HaploTranslations</title>
+
+	<script type="text/javascript" src="resources/combined.js?1841058525"></script>
+	<script type="text/javascript" src="elementlist.js?551583536"></script>
+	<script type="text/javascript">
+		var ApiGen = ApiGen || {};
+		ApiGen.options = {"elementDetailsCollapsed":true,"elementsOrder":"natural"};
+	</script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3295955786">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+		<div id="groups">
+			<h3>Packages</h3>
+			<ul>
+				<li><a href="package-HaploAction.html">HaploAction</a>
+						</li>
+				<li><a href="package-HaploCache.html">HaploCache</a>
+						</li>
+				<li><a href="package-HaploConfig.html">HaploConfig</a>
+						</li>
+				<li><a href="package-HaploFileCache.html">HaploFileCache</a>
+						</li>
+				<li><a href="package-HaploNonce.html">HaploNonce</a>
+						</li>
+				<li><a href="package-HaploRouter.html">HaploRouter</a>
+						</li>
+				<li><a href="package-HaploSession.html">HaploSession</a>
+						</li>
+				<li><a href="package-HaploSetup.html">HaploSetup</a>
+						</li>
+				<li><a href="package-HaploSingleton.html">HaploSingleton</a>
+						</li>
+				<li><a href="package-HaploTemplate.html">HaploTemplate</a>
+						</li>
+				<li><a href="package-HaploTiming.html">HaploTiming</a>
+						</li>
+				<li class="active"><a href="package-HaploTranslations.html">HaploTranslations</a>
+						</li>
+				<li><a href="package-None.html">None</a>
+						</li>
+				<li><a href="package-PageNotFound.html">PageNotFound</a>
+						</li>
+				<li><a href="package-PHP.html">PHP</a>
+						</li>
+				<li><a href="package-StaticPage.html">StaticPage</a>
+						</li>
+			</ul>
+
+		</div>
+
+		<hr>
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-HaploTranslations.html">HaploTranslations</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text">
+		<input type="submit" value="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="package-HaploTranslations.html" title="Summary of HaploTranslations"><span>Package</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class HaploTranslations</h1>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		
+
+				<b>Package:</b>
+				<a href="package-HaploTranslations.html">HaploTranslations</a> <br>
+				<b>Author:</b>
+				Ed Eliot<br>
+		<b>Located at</b> <a href="source-class-HaploTranslations.html#13" title="Go to source code">haplo-framework/translations/haplo-translations.inc.php</a><br>
+	</div>
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-HaploTranslations.html#61" title="Go to source code">__construct</a>( <span>string <var>$lang</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$defaultLang</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$translationsDir</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$translationsCacheDir</var> = <span class="php-keyword1">null</span></span>, <span> <var>$translationsAllowShowKeys</var> = <span class="php-keyword1">null</span> </span> )</code>
+
+		<div class="description short">
+			
+<p>Constructor for class</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Constructor for class</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$lang</var></dt>
+					<dd><code>string</code><br> Language to use</dd>
+					<dt><var>$defaultLang</var></dt>
+					<dd><code>string</code><br>$translationsDir Path to translation files</dd>
+					<dt><var>$translationsDir</var></dt>
+					<dd><code>string</code><br>$translationsCacheDir Path to translation cache files</dd>
+					<dt><var>$translationsCacheDir</var></dt>
+					<dd><code>boolean</code><br>$translationsAllowShowKeys Whether or not to show translation keys when
+?showKeys=true present</dd>
+					<dt><var>$translationsAllowShowKeys</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+				<h4>Author</h4>
+				<div class="list">
+						Ed Eliot<br>
+				</div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="process" id="_process">
+
+		<td class="attributes"><code>
+			
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_process">#</a>
+		<code><a href="source-class-HaploTranslations.html#138" title="Go to source code">process</a>( )</code>
+
+		<div class="description short">
+			
+<p>Processes selected translation file</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Processes selected translation file</p>
+
+
+
+
+
+
+				<h4>Author</h4>
+				<div class="list">
+						Ed Eliot<br>
+				</div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="get" id="_get">
+
+		<td class="attributes"><code>
+			
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_get">#</a>
+		<code><a href="source-class-HaploTranslations.html#184" title="Go to source code">get</a>( <span>string <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Get translation for specified key</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get translation for specified key</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br> Key to look up translation for</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>
+				</div>
+
+
+				<h4>Author</h4>
+				<div class="list">
+						Ed Eliot<br>
+				</div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="get_plural" id="_get_plural">
+
+		<td class="attributes"><code>
+			
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_get_plural">#</a>
+		<code><a href="source-class-HaploTranslations.html#227" title="Go to source code">get_plural</a>( <span>string <var>$key</var></span>, <span>integer <var>$qty</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Get plural versions of a translation depending on qty, for example: 5 apples
+(not implemented yet)</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get plural versions of a translation depending on qty, for example: 5 apples
+(not implemented yet)</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>string</code><br> Key to look up translation for</dd>
+					<dt><var>$qty</var></dt>
+					<dd><code>integer</code><br>number of items</dd>
+				</dl></div>
+
+
+
+				<h4>Author</h4>
+				<div class="list">
+						Ed Eliot<br>
+				</div>
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="lang" id="$lang">
+
+		<td class="attributes"><code>
+			
+			protected 
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-HaploTranslations.html#18" title="Go to source code"><var>$lang</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$lang" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Stores the selected language</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Stores the selected language</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="translationsDir" id="$translationsDir">
+
+		<td class="attributes"><code>
+			
+			protected 
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-HaploTranslations.html#24" title="Go to source code"><var>$translationsDir</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$translationsDir" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Stores the path to the translation files</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Stores the path to the translation files</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="translationsCacheDir" id="$translationsCacheDir">
+
+		<td class="attributes"><code>
+			
+			protected 
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-HaploTranslations.html#30" title="Go to source code"><var>$translationsCacheDir</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$translationsCacheDir" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Stores the path to the data representing processed translation files</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Stores the path to the data representing processed translation files</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="translationsAllowShowKeys" id="$translationsAllowShowKeys">
+
+		<td class="attributes"><code>
+			
+			protected 
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-HaploTranslations.html#36" title="Go to source code"><var>$translationsAllowShowKeys</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$translationsAllowShowKeys" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Stores whether or not a user can show translation keys by passing
+?showKeys=true</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Stores whether or not a user can show translation keys by passing
+?showKeys=true</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="file" id="$file">
+
+		<td class="attributes"><code>
+			
+			protected 
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-HaploTranslations.html#42" title="Go to source code"><var>$file</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$file" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Stores the path to the selected translation file</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Stores the path to the selected translation file</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="cacheFile" id="$cacheFile">
+
+		<td class="attributes"><code>
+			
+			protected 
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-HaploTranslations.html#48" title="Go to source code"><var>$cacheFile</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$cacheFile" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Stores the path to the cache file for the selected translation</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Stores the path to the cache file for the selected translation</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="translations" id="$translations">
+
+		<td class="attributes"><code>
+			
+			protected 
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-HaploTranslations.html#54" title="Go to source code"><var>$translations</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$translations" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>A key/value pair containing translations found</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>A key/value pair containing translations found</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen 2.4.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
