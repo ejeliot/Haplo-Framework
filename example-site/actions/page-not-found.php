@@ -1,6 +1,6 @@
 <?php
     /****************************************************************************************/
-    /* PageNotFound                                                                         */
+    /* PageNotFound - default 404 action                                                    */
     /*                                                                                      */
     /* This file is part of the Haplo Framework, a simple PHP MVC framework                 */ 
     /*                                                                                      */
