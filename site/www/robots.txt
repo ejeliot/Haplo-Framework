@@ -1,6 +1,0 @@
-# prevent crawling of assets
-
-User-agent: *
-Disallow: css/
-Disallow: /js/
-Disallow: /images/ # remove if you want site images to appear in image search

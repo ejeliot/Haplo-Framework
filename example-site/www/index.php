@@ -1,53 +1,74 @@
 <?php
-    /**
-     * An example routing file - you can add as many of these as you
-     * need. It instantiates the routing code with a list of URL pattern
-     * matches.                                                         
-     *                                                                  
-     * URLs can take one of two formats:                                
-     * /index.php/news/                                         
-     * or                                                               
-     * /news/                                                           
-     * if you want to use the second form you'll need                   
-     * mod_rewrite enabled and support for .htaccess files.             
-     * To improve performance you can alternatively add the rules       
-     * found in www/.htaccess to your Apache virtual host configuration.
-     *
-     * @author Ed Eliot
-     * @copyright Brightfish Software Limited, 2008-2010. See license.txt for more details.
-     **/
+    /****************************************************************************************/
+    /* Example index.php                                                                    */
+    /*                                                                                      */
+    /* This file is part of the Haplo Framework, a simple PHP MVC framework                 */ 
+    /*                                                                                      */
+    /* Copyright (C) 2008-2011, Brightfish Software Limited/Ed Eliot                        */
+    /*                                                                                      */
+    /* For the full copyright and license information, please view the LICENSE              */
+    /* file that was distributed with this source code                                      */
+    /****************************************************************************************/
+    
+    ini_set('display_errors', true); // remove this line in production environment
+    error_reporting(E_ALL | E_STRICT);
     
     /**
-     * include framework libraries and initial config
+     * --------------------------------------------------------------
+     * define system paths
+     * --------------------------------------------------------------
      **/
-    require('../includes/init.inc.php');
+     
+    // path to the folder which contains everything
+    define('BASE_PATH', __DIR__.'/../..');
+    // path to the site folder
+    define('SITE_BASE', __DIR__.'/..');
+    // path to the haplo-framework files
+    define('HAPLO_FRAMEWORK_BASE', BASE_PATH.'/haplo-framework');
+    // path to the folder that contains config ini files
+    define('HAPLO_CONFIG_PATH', SITE_BASE.'/config');
     
-    // set up URL mappings, expressions are processed in order 
-    // until a match is found
+    /**
+     * --------------------------------------------------------------
+     * include haplo framework files
+     * --------------------------------------------------------------
+     **/
+    require(HAPLO_FRAMEWORK_BASE.'/haplo-init.inc.php');
+    
+    /**
+     * --------------------------------------------------------------
+     * include custom files
+     * --------------------------------------------------------------
+     **/
+     
+     // add your files here
+    
+     /**
+      * --------------------------------------------------------------
+      * set up URL mappings
+      * --------------------------------------------------------------
+      **/
     $urls = array(
-        // an example of 301 redirecting URLs without trailing slash to corresponding 
-        // URLs with trailing slash to prevent duplicate URLs 
-        // (exclude paths ending with .html)
-        '/(?<path>.+[^/|\.html])' => array(
-            'type' => 'redirect',
-            'url' => '/<path>/',
-            'code' => 301
-        ),
-        // redirect default /welcome/ page to / to prevent duplicate URLs
-        '/welcome/' => array(
+        '/home/' => array( // rewrite default home action
             'type' => 'redirect',
             'url' => '/',
             'code' => 301
         ),
-        '/nonce-example/' => 'nonce-example',
-        // map everyting else to static-page action
-        '/(?<template>[a-z0-9/-]*)' => 'static-page',
+        '/(?<template>[a-z0-9/-]*)' => 'static-page'
     );
     
-    // create an instance of the router and pass in URL mappings
+    /**
+     * --------------------------------------------------------------
+     * create an instance of the router and pass in URL mappings
+     * --------------------------------------------------------------
+     **/
     $router = HaploRouter::get_instance($urls);
     
-    // create new session
+    /**
+     * --------------------------------------------------------------
+     * create new session
+     * --------------------------------------------------------------
+     **/
     HaploSession::create(
         $config->get_key('sessions', 'name'),
         $config->get_key('sessions', 'store'),
@@ -55,29 +76,34 @@
     );
     
     /**
+     * --------------------------------------------------------------
      * set up support for translations
-     * the language you pass should probably be a locale code (e.g. en-us)
+     * --------------------------------------------------------------
      **/
-    $translations = new HaploTranslations('en-us');
-    // an example of using the locale specified by the browser
-    // $translations = new HaploTranslations($router->get_browser_locale('en-us'));
+    $locale = 'en-us'; // hard coded locale
+    //$locale = $router->get_browser_locale('en-us'); // set based on browser
+    $translations = new HaploTranslations($locale);
     
-    // load selected action
+    /**
+     * --------------------------------------------------------------
+     * load selected action
+     * --------------------------------------------------------------
+     **/
     if ($action = $router->get_action()) {
         require($action);
         
-        // actions can optionally contain a class which is instantiated if present, otherwise 
-        // straight PHP is assumed
         if ($actionClass = $router->get_action_class()) {
             $actionClass::get_instance(
                 // pass any other objects that need to be accessible to the 
-                // action classes in this array
+                // action class in this array
                 array(
                     'router' => $router,
                     'translations' => $translations,
                     'config' => $config // global config object - instantiated in haplo-init.inc.php
                 )
             );
+        } else {
+            throw new HaploClassNotFoundException("Action class doesn't exist for action ".$action);
         }
     }
 ?>

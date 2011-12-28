@@ -1,3 +1,0 @@
-# add key/value pairs
-
-key = value
