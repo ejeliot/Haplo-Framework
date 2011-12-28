@@ -20,7 +20,7 @@
     require(HAPLO_FRAMEWORK_BASE.'/config/haplo-config.inc.php');
     
     // get instance of config helper
-    // has to be instantated before the next set of includdes 
+    // has to be instantated before the next set of includes 
     // as they use the config object
     $config = HaploConfig::get_instance();
     
