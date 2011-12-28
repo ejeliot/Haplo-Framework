@@ -1,19 +1,17 @@
 <?php
-    /****************************************************************************************/
-    /* HaploTranslations - Provides translation string support                              */
-    /*                                                                                      */
-    /* This file is part of the Haplo Framework, a simple PHP MVC framework                 */ 
-    /*                                                                                      */
-    /* Copyright (C) 2008-2011, Brightfish Software Limited/Ed Eliot                        */
-    /*                                                                                      */
-    /* For the full copyright and license information, please view the LICENSE              */
-    /* file that was distributed with this source code                                      */
-    /****************************************************************************************/
-    
     /**
-     * @author Ed Eliot
+     * HaploTranslations - Provides translation string support
+     *
+     * This file is part of the Haplo Framework, a simple PHP MVC framework
+     *
+     * Copyright (C) 2008-2011, Brightfish Software Limited/Ed Eliot
+     *
+     * For the full copyright and license information, please view the LICENSE
+     * file that was distributed with this source code
+     *
      * @package HaploTranslations
      **/
+    
     class HaploTranslations {
         /**
          * Stores the selected language

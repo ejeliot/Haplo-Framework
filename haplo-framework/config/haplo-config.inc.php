@@ -1,20 +1,18 @@
 <?php
-    /****************************************************************************************/
-    /* HaploConfig - this class reads config files (in ini format) and provides helper      */
-    /* methods for accessing properties set in those files                                  */
-    /*                                                                                      */
-    /* This file is part of the Haplo Framework, a simple PHP MVC framework                 */ 
-    /*                                                                                      */
-    /* Copyright (C) 2008-2011, Brightfish Software Limited/Ed Eliot                        */
-    /*                                                                                      */
-    /* For the full copyright and license information, please view the LICENSE              */
-    /* file that was distributed with this source code                                      */
-    /****************************************************************************************/
-    
     /**
-     * @author Ed Eliot
+     * HaploConfig - this class reads config files (in ini format) and provides helper
+     * methods for accessing properties set in those files
+     *
+     * This file is part of the Haplo Framework, a simple PHP MVC framework
+     *
+     * Copyright (C) 2008-2011, Brightfish Software Limited/Ed Eliot
+     *
+     * For the full copyright and license information, please view the LICENSE
+     * file that was distributed with this source code
+     *
      * @package HaploConfig
      **/
+    
     class HaploConfig extends HaploSingleton {
         protected $environment;
 

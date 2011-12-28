@@ -1,21 +1,19 @@
 <?php
-    /****************************************************************************************/
-    /* HaploRouter - this class routes requests by selecting an action from                 */
-    /* a mapping array containing regular expressions for URL patterns and                  */
-    /* their associated action                                                              */
-    /*                                                                                      */
-    /* This file is part of the Haplo Framework, a simple PHP MVC framework                 */ 
-    /*                                                                                      */
-    /* Copyright (C) 2008-2011, Brightfish Software Limited/Ed Eliot                        */
-    /*                                                                                      */
-    /* For the full copyright and license information, please view the LICENSE              */
-    /* file that was distributed with this source code                                      */
-    /****************************************************************************************/
-    
     /**
-     * @author Ed Eliot
+     * HaploRouter - this class routes requests by selecting an action from
+     * a mapping array containing regular expressions for URL patterns and
+     * their associated action
+     *
+     * This file is part of the Haplo Framework, a simple PHP MVC framework
+     *
+     * Copyright (C) 2008-2011, Brightfish Software Limited/Ed Eliot
+     *
+     * For the full copyright and license information, please view the LICENSE
+     * file that was distributed with this source code
+     *
      * @package HaploRouter
      **/
+    
     class HaploRouter extends HaploSingleton {
         /**
          * Stores URL mappings passed to the class on instantiation

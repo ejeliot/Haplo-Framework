@@ -1,15 +1,4 @@
 <?php
-    /****************************************************************************************/
-    /* StaticPage                                                                           */
-    /*                                                                                      */
-    /* This file is part of the Haplo Framework, a simple PHP MVC framework                 */ 
-    /*                                                                                      */
-    /* Copyright (C) 2008-2011, Brightfish Software Limited/Ed Eliot                        */
-    /*                                                                                      */
-    /* For the full copyright and license information, please view the LICENSE              */
-    /* file that was distributed with this source code                                      */
-    /****************************************************************************************/
-    
     /**
      * StaticPage - this action class finds and loads templates based
      * on the URL entered. This would allow you to create a simple "static" site.
@@ -17,8 +6,16 @@
      * Prefix include templates with an underscore (_) to prevent them being surfaced as 
      * actual pages
      *
+     * This file is part of the Haplo Framework, a simple PHP MVC framework
+     *
+     * Copyright (C) 2008-2011, Brightfish Software Limited/Ed Eliot
+     *
+     * For the full copyright and license information, please view the LICENSE
+     * file that was distributed with this source code
+     *
      * @package StaticPage
      **/
+    
     class StaticPage extends HaploAction {
         protected $section;
         

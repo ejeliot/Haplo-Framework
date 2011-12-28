@@ -1,14 +1,14 @@
 <?php
-    /****************************************************************************************/
-    /* Example index.php                                                                    */
-    /*                                                                                      */
-    /* This file is part of the Haplo Framework, a simple PHP MVC framework                 */ 
-    /*                                                                                      */
-    /* Copyright (C) 2008-2011, Brightfish Software Limited/Ed Eliot                        */
-    /*                                                                                      */
-    /* For the full copyright and license information, please view the LICENSE              */
-    /* file that was distributed with this source code                                      */
-    /****************************************************************************************/
+    /**
+     * Example index.php
+     *
+     * This file is part of the Haplo Framework, a simple PHP MVC framework 
+     *
+     * Copyright (C) 2008-2011, Brightfish Software Limited/Ed Eliot
+     *
+     * For the full copyright and license information, please view the LICENSE
+     * file that was distributed with this source code
+     **/
     
     ini_set('display_errors', true); // remove this line in production environment
     error_reporting(E_ALL | E_STRICT);

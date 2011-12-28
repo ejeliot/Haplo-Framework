@@ -1,20 +1,18 @@
 <?php
-    /****************************************************************************************/
-    /* HaploTemplate - templating class which uses PHP for its templating language rather   */
-    /* than reinventing the wheel with custom syntax                                        */
-    /*                                                                                      */
-    /* This file is part of the Haplo Framework, a simple PHP MVC framework                 */ 
-    /*                                                                                      */
-    /* Copyright (C) 2008-2011, Brightfish Software Limited/Ed Eliot                        */
-    /*                                                                                      */
-    /* For the full copyright and license information, please view the LICENSE              */
-    /* file that was distributed with this source code                                      */
-    /****************************************************************************************/
-    
     /**
-     * @author Ed Eliot
+     * HaploTemplate - templating class which uses PHP for its templating language rather
+     * than reinventing the wheel with custom syntax
+     *
+     * This file is part of the Haplo Framework, a simple PHP MVC framework
+     *
+     * Copyright (C) 2008-2011, Brightfish Software Limited/Ed Eliot
+     *
+     * For the full copyright and license information, please view the LICENSE
+     * file that was distributed with this source code
+     *
      * @package HaploTemplate
      **/
+    
     class HaploTemplate {
         /**
          * Stores filename of template to render

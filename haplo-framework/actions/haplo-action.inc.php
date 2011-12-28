@@ -1,20 +1,18 @@
 <?php
-    /****************************************************************************************/
-    /* HaploAction - abstract class that provides the base functionality                    */ 
-    /* for descendent action classes                                                        */
-    /*                                                                                      */
-    /* This file is part of the Haplo Framework, a simple PHP MVC framework                 */ 
-    /*                                                                                      */
-    /* Copyright (C) 2008-2011, Brightfish Software Limited/Ed Eliot                        */
-    /*                                                                                      */
-    /* For the full copyright and license information, please view the LICENSE              */
-    /* file that was distributed with this source code                                      */
-    /****************************************************************************************/
-
     /**
-     * @author Ed Eliot
+     * HaploAction - abstract class that provides the base functionality
+     * for descendent action classes
+     *
+     * This file is part of the Haplo Framework, a simple PHP MVC framework
+     *
+     * Copyright (C) 2008-2011, Brightfish Software Limited/Ed Eliot
+     *
+     * For the full copyright and license information, please view the LICENSE
+     * file that was distributed with this source code
+     *
      * @package HaploAction
-     **/ 
+     **/
+
     abstract class HaploAction extends HaploSingleton {
         /**
          * Stores original options passed to class

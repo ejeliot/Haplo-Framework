@@ -1,21 +1,18 @@
 <?php
-    /****************************************************************************************/
-    /* Haplo init file - default framework config file - create your own and                */ 
-    /* link to that in index.php instead if you want to modify the default                  */
-    /* set up - don't forget most configuration can be changed by creating                  */
-    /* override ini files instead                                                           */
-    /*                                                                                      */
-    /* This file is part of the Haplo Framework, a simple PHP MVC framework                 */ 
-    /*                                                                                      */
-    /* Copyright (C) 2008-2011, Brightfish Software Limited/Ed Eliot                        */
-    /*                                                                                      */
-    /* For the full copyright and license information, please view the LICENSE              */
-    /* file that was distributed with this source code                                      */
-    /****************************************************************************************/
-    
     /**
-     * @author Ed Eliot
-     * @package Haplo init file
+     * Haplo init file - default framework config file - create your own and
+     * link to that in index.php instead if you want to modify the default
+     * set up - don't forget most configuration can be changed by creating
+     * override ini files instead
+     *
+     * This file is part of the Haplo Framework, a simple PHP MVC framework
+     *
+     * Copyright (C) 2008-2011, Brightfish Software Limited/Ed Eliot
+     *
+     * For the full copyright and license information, please view the LICENSE
+     * file that was distributed with this source code
+     *
+     * @package Haplo Init File
      **/
     
     require(HAPLO_FRAMEWORK_BASE.'/exceptions/haplo-exceptions.inc.php');
