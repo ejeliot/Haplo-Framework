@@ -24,6 +24,9 @@
     // as they use the config object
     $config = HaploConfig::get_instance();
     
+    // set timezone
+    date_default_timezone_set($config->get_key_or_default('timezones', 'current', 'UTC'));
+    
     // include Haplo Framework files - enable or disable as required
     require(HAPLO_FRAMEWORK_BASE.'/sessions/haplo-session.inc.php');
     require(HAPLO_FRAMEWORK_BASE.'/misc/haplo-timing.inc.php');

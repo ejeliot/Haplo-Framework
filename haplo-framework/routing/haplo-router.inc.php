@@ -232,14 +232,8 @@
             // processing stops as soon as a match is found so URL patterns 
             // should be ordered with the most important first
             foreach ($urls as $regEx => $dest) {
-                $requestVars = array();
-                
                 // does the current URL match - if so capture matched sub-groups
                 if (preg_match("#^$regEx(\?.*)?$#", $this->get_request_uri(), $this->requestVars)) {
-                    // the first match is the full URL - we not really 
-                    // interested in that so drop
-                    array_shift($requestVars);
-                    
                     // rule could be simple mapping to action or more complex 
                     // details containing mapping type etc
                     if (is_array($dest)) {
