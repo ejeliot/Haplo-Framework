@@ -53,7 +53,8 @@
         
         static public function is_url($input) {
             // source - https://www.owasp.org/index.php/OWASP_Validation_Regex_Repository
-            return preg_match("/^((((https?|ftps?|gopher|telnet|nntp)://)|(mailto:|news:))(%[0-9a-f]{2}|[-()_.!~*';/?:@&=+$,a-z0-9])+)([).!';/?:,][[:blank:]])?$/i", $input);
+            // modified to remove additional protocols as generally only interested in http and https
+            return preg_match("/^https?://(%[0-9a-f]{2}|[-()_.!~*';/?:@&=+$,a-z0-9])+)([).!';/?:,][[:blank:]])?$/i", $input);
         }
         
         static public function is_ip($input) {
