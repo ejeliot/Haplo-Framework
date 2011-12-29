@@ -14,13 +14,6 @@
      **/
      
     class HaploValidate {
-        static protected $daysInEachMonth = array(
-            1 => 31, 2 => 28, 3 => 31,
-            4 => 30, 5 => 31, 6 => 30,
-            7 => 31, 8 => 31, 9 => 30,
-            10 => 31, 11 => 30, 12 => 31
-        );
-        
         static public function is_safe_string($input, $min = null, $max = null) {
             if (!is_null($min) && is_null($max)) {
                 return preg_match('/^[a-z0-9\s._-]{'.$min.',}$/i', $input);
