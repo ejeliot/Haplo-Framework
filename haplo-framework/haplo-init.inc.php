@@ -42,6 +42,7 @@
     require(HAPLO_FRAMEWORK_BASE.'/logging/haplo-log.inc.php');
     require(HAPLO_FRAMEWORK_BASE.'/misc/haplo-http.inc.php');
     require(HAPLO_FRAMEWORK_BASE.'/misc/haplo-rss.inc.php');
+    require(HAPLO_FRAMEWORK_BASE.'/validation/haplo-validate.inc.php');
     
     // this checks that certain options are set correctly, directories 
     // are writable where necessary etc - once you're happy everything is 
