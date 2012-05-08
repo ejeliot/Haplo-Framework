@@ -53,7 +53,7 @@
                 $e->getCode(),
                 $e->getLine(),
                 $e->getFile()
-            );
+            ));
         }
         
         public static function get_instance($params = array()) {
