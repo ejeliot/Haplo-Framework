@@ -40,7 +40,7 @@
             
             $value = $this->memcached->get($this->key);
             
-            if ($this->memcached->getResultCode() != Memcached::RES_NOTFOUND) {
+            if ($this->memcached->getResultCode() != Memcached::RES_SUCCESS) {
                 self::$cache[$this->key] = $value;
                 return true;
             }
