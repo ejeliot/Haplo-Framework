@@ -29,7 +29,7 @@
                 $cacheTime = $config->get_key('cache', 'length');
             }
             $type = $config->get_key('cache', 'type');
-            $libraryPath = $config->get_key('paths', 'framework')."/haplo-$type-cache.inc.php";
+            $libraryPath = realpath(__DIR__)."/haplo-$type-cache.inc.php";
             $libraryClassName = 'Haplo'.ucfirst($type).'Cache';
             
             if (file_exists($libraryPath)) {

@@ -37,4 +37,5 @@
     class HaploEmptyParameterException extends Exception {}
     class HaploInvalidParameterException extends Exception {}
     class HaploClassNotFoundException extends Exception {}
+    class HaploDirNotWritableException extends Exception {}
 ?>

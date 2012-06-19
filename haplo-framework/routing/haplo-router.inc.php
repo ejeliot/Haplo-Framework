@@ -123,7 +123,15 @@
          **/
         public function get_action_class() {
             if (!empty($this->action)) {
-                $className = str_replace('-', ' ', $this->action);
+                $parts = explode('/', $this->action);
+                
+                if (count($parts) > 1) {
+                    $className = $parts[count($parts) - 1];
+                } else {
+                    $className = $this->action;
+                }
+                
+                $className = str_replace('-', ' ', $className);
                 $className = ucwords($className);
                 $className = str_replace(' ', '', $className);
                 

@@ -21,7 +21,7 @@
             }
             
             if (is_null($requestTimeout)) {
-                $requestTimeout = $this->get_key('http', 'requestTimeout');
+                $requestTimeout = $config->get_key('http', 'requestTimeout');
             }
             
             // initiate session

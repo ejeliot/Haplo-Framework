@@ -50,10 +50,10 @@
             error_log(sprintf(
                 'Error connecting to database (%s - %d) on line %d in %s', 
                 $e->getMessage(), 
-                $e->getCode()),
+                $e->getCode(),
                 $e->getLine(),
                 $e->getFile()
-            );
+            ));
         }
         
         public static function get_instance($params = array()) {

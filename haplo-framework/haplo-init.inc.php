@@ -54,7 +54,7 @@
     spl_autoload_register(function($class) {
         // trying to load a model class
         if (strpos($class, 'Model') !== false) {
-            $class = preg_replace('/([a-z0-9])?([A-Z])/', '$1-$2', $class);
+            $class = trim(preg_replace('/([a-z0-9])?([A-Z])/', '$1-$2', $class), '-');
             $class = strtolower($class);
             require_once(SITE_BASE.'/models/'.$class.'.inc.php');
         }
