@@ -34,7 +34,13 @@
             
             if (file_exists($libraryPath)) {
                 require_once($libraryPath);
-                return new $libraryClassName($key, $cacheTime);
+                if ($type == 'memcached') {
+                    return new $libraryClassName($key, $cacheTime, $config->get_key_or_default('cache', 'servers', array(
+                        '127.0.0.1:11211'
+                    )));
+                } else {
+                    return new $libraryClassName($key, $cacheTime);
+                }
             } else {
                 throw new HaploLibraryNotFoundException("Cache library ($libraryClassName) not found.");
             }
