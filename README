@@ -1,16 +1,1 @@
-A simple and lightweight PHP MVC development framework - helps you structure your app without getting in your way.
-
-Key Features
-
-   * User/SEO friendly URLs based on regex pattern matching
-   * Basic built in protection for XSS and helpers to prevent CSRF
-   * PHP templating
-   * Caching (file or memcached)
-   * Simple DB layer (wrapper to PDO)
-   * Support for localisation
-
-See LICENSE for conditions of use.
-
-API docs are available at http://ejeliot.github.com/Haplo-Framework/.
-
-Please let me know if you encounter any errors whilst using.
+This repository is deprecated. The framework has been completely rewritten and is under active development at https://github.com/BrightfishSoftware/HaploMvc.
