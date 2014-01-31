@@ -57,7 +57,8 @@
          **/
         protected function get_environments() {
             $environmentsFile = HAPLO_CONFIG_PATH.'/environments.ini';
-            $server = gethostname();
+            $serverOverride = SITE_BASE.'/server-override.txt';
+            $server = file_exists($serverOverride) ? trim(file_get_contents($serverOverride)) : gethostname();
 
             if (file_exists($environmentsFile)) {
                 $environments = parse_ini_file($environmentsFile, true);
