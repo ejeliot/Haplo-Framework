@@ -85,7 +85,7 @@
          * Set a variable (make it available within the scope of the template)
          *
          * @param string $name Name of variable to set
-         * @param variant $value Value to give to variable
+         * @param mixed $value Value to give to variable
          * @param boolean $stripHtml Whether or not to strip HTML in variable when output in template
          * @param boolean $convertEntities Whether or not to convert entities in variable when output in template
          * @param string $charSet The character set to use when converting entities
