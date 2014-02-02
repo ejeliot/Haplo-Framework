@@ -147,8 +147,8 @@
          * value if the specified sub-pattern wasn't found
          *
          * @param string $name Name of parameter to get value for
-         * @param variant $default Default value to use if the parameter hasn't been set
-         * @return void
+         * @param mixed $default Default value to use if the parameter hasn't been set
+         * @return mixed
          * @author Ed Eliot
          **/
         public function get_request_var($name, $default = null) {
@@ -229,7 +229,7 @@
          * Logic to work out which view should be loaded and process parameters
          *
          * @param array $urls URL patterns to process current URL against
-         * @return void
+         * @return bool
          * @author Ed Eliot
          **/
         protected function process($urls) {
